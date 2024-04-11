@@ -1,19 +1,29 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
 #include <DHT.h>
+#include <Wire.h>
+#include <Adafruit_BMP280.h>
 #include "credentials.h"
 
 #define DHTPIN 27
+#define I2C_SDA 33
+#define I2C_SCL 32
 
+TwoWire I2CBMP = TwoWire(0);
 DHT dht22(DHTPIN, DHT22);
+Adafruit_BMP280 bmp(&I2CBMP);
 
-String URL = "http://" + IP + "/weather/testdata.php";
+String URL = "http://" + IP + "/weather/postdata.php";
 
 int temp = 0;
 int hum = 0;
+int temp_bmp = 0;
+int pres = 0;
 
 void setup() {
     Serial.begin(115200);
+    I2CBMP.begin(I2C_SDA, I2C_SCL, 100000);
+    bmp.begin(0x77);
     dht22.begin();
     WiFiConnect();
 }
@@ -21,6 +31,10 @@ void setup() {
 void loop() {
     temp = dht22.readHumidity();
     hum = dht22.readTemperature();
+    temp_bmp = bmp.readTemperature();
+    pres = bmp.readPressure();
+    Serial.println(temp_bmp);
+    Serial.println(pres);
     sendPostRequest();
     delay(10000);
 }
@@ -42,7 +56,7 @@ void WiFiConnect() {
 
 
 void sendPostRequest() {
-    String postdata = "temp=" + String(temp) + "&hum=" + String(hum);
+    String postdata = "temp=" + String(temp) + "&temp_bmp=" + String(temp_bmp) + "&hum=" + String(hum) + "&pres=" + String(pres);
     HTTPClient http;
     http.begin(URL);
 
