@@ -5,9 +5,9 @@
 #include <Adafruit_BMP280.h>
 #include "credentials.h"
 
-#define DHTPIN 27
-#define I2C_SDA 33
-#define I2C_SCL 32
+#define DHTPIN 19
+#define I2C_SDA 18
+#define I2C_SCL 17
 
 TwoWire I2CBMP = TwoWire(0);
 DHT dht22(DHTPIN, DHT22);
