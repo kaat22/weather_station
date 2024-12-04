@@ -18,7 +18,7 @@ The microcontroller we used in the project was ESP32-WROOM-32E (Figure 3). The m
 ![kuva](https://github.com/user-attachments/assets/56ac4c72-d674-4552-a20c-27fbb3ae43b8 "Figure 3: ESP32-WROOM-32E")
 
 ## Results
-We achieved our primary goal of gathering and tranfering data (via Wi-Fi) from the stations sensors to a server, wherefrom it can be viewed through a web browser. We also partially achieved our secondary goal of powering the device with a rechargeable battery, however due to an error in the pcb design phase we were unable to get the recharging feature of the charging circuit functional.
+We achieved our primary goal of gathering and transferring data (via Wi-Fi) from the station's sensors to a server, wherefrom it can be viewed through a web browser. We also partially achieved our secondary goal of powering the device with a rechargeable battery, however due to an error in the pcb design phase we were unable to get the recharging feature of the charging circuit functional.
 
 ## Refrences
 ESP-32WROOM-32E datasheet Source:
